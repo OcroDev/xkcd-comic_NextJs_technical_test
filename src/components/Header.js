@@ -1,23 +1,36 @@
-import { Text } from "@nextui-org/react";
+import { Container, Text } from "@nextui-org/react";
 import Link from "next/link";
 
-export default function Header() {
+export function Header() {
   return (
     <>
-      <header>
+      <Container as="header" responsive display="flex" justify="space-between">
         <div>
           <Text small>
             next <Text>xkcd</Text>
           </Text>
         </div>
         <nav>
-          <ul>
+          <Container
+            as="ul"
+            display="flex"
+            direction="row"
+            // justify="space-around"
+            style={{ listStyle: "none" }}
+            responsive
+          >
             <li>
-              <Link href="/"></Link>
+              <Link href="/">Home</Link>
             </li>
-          </ul>
+            <li>
+              <Link href="/about">About</Link>
+            </li>
+            <li>
+              <Link href="/search">Search</Link>
+            </li>
+          </Container>
         </nav>
-      </header>
+      </Container>
     </>
   );
 }
