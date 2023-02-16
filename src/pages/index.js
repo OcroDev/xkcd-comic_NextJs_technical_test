@@ -1,12 +1,9 @@
 import Head from "next/head";
-import { Inter } from "@next/font/google";
-import styles from "@/styles/Home.module.css";
 import { Container, Card, Row, Text } from "@nextui-org/react";
 import { Header } from "@/components/Header";
+import fs from "fs/promises";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export default function Home() {
+export default function Home({ comics }) {
   return (
     <>
       <div>
@@ -18,7 +15,7 @@ export default function Home() {
         </Head>
         <Header />
         <main>
-          <Container>
+          {/* <Container>
             <Card css={{ $$cardColor: "$colors$primary" }}>
               <Card.Body>
                 <Row justify="center" align="center">
@@ -30,9 +27,19 @@ export default function Home() {
                 </Row>
               </Card.Body>
             </Card>
-          </Container>
+          </Container> */}
         </main>
       </div>
     </>
   );
+}
+
+export async function getStaticProps(context) {
+  const files = await fs.readFile("./comics");
+
+  return {
+    props: {
+      comics: [],
+    },
+  };
 }

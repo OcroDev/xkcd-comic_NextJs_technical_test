@@ -4,33 +4,30 @@ import Link from "next/link";
 export function Header() {
   return (
     <>
-      <Container as="header" responsive display="flex" justify="space-between">
-        <div>
-          <Text small>
-            next <Text>xkcd</Text>
-          </Text>
-        </div>
+      <header className="flex justify-between item-center p-4 max-w-xl m-auto">
+        <h1 className="font-bold">
+          next <span className="font-light">xkcd</span>
+        </h1>
         <nav>
-          <Container
-            as="ul"
-            display="flex"
-            direction="row"
-            // justify="space-around"
-            style={{ listStyle: "none" }}
-            responsive
-          >
+          <ul className="flex flex-row gap-2 ">
             <li>
-              <Link href="/">Home</Link>
+              <Link href="/" className="text-sm font-semibold">
+                Home
+              </Link>
             </li>
             <li>
-              <Link href="/about">About</Link>
+              <Link href="/about" className="text-sm font-semibold">
+                About
+              </Link>
             </li>
             <li>
-              <Link href="/search">Search</Link>
+              <Link href="/search" className="text-sm font-semibold">
+                Search
+              </Link>
             </li>
-          </Container>
+          </ul>
         </nav>
-      </Container>
+      </header>
     </>
   );
 }
