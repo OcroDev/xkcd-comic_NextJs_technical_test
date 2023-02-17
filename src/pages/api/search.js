@@ -1,5 +1,14 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-export default function handler(req, res) {
-  res.status(200).json({ name: 'John Doe' })
+// For the search only version
+import { search } from '@/services/search';
+
+export default async function handler(req, res) {
+  const {
+    query: { q },
+  } = req;
+
+  const { results } = await search({ query: q });
+  console.log(results);
+  return res.status(200).json(results);
 }
