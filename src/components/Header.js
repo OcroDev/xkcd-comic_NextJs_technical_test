@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { useRef, useState } from 'react';
-import axios from 'axios';
 
 export function Header() {
   const searchRef = useRef();
@@ -8,7 +7,6 @@ export function Header() {
 
   const handleChange = () => {
     const q = searchRef.current.value;
-    console.log(q);
 
     fetch(`/api/search?q=${q}`)
       .then((res) => res.json())
@@ -31,26 +29,36 @@ export function Header() {
               Home
             </Link>
           </li>
-          <li className='relative'>
-            <input ref={searchRef} type='search' onChange={handleChange} />
-            {Boolean(results.length > 0) && (
-              <div className='absolute top-0 left-0'>
-                <ul>
-                  {results.map((result) => {
-                    return (
-                      <li key={result.id}>
-                        <Link
-                          href={`/comic/${result.id}`}
-                          className='text-sm font-semibold'
+          <li>
+            <input
+              ref={searchRef}
+              type='search'
+              onChange={() => handleChange()}
+              className='px-4 py-1 text-xs border border-gray-400 rounded-3xl'
+            />
+            <div className='relative'>
+              {results !== null && (
+                <div className='absolute top-0 left-0'>
+                  <ul>
+                    {results.map((result) => {
+                      return (
+                        <li
+                          key={result.id}
+                          className='hover:bg-sky-100 hover:opacity-70'
                         >
-                          {result.title}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            )}
+                          <Link
+                            href={`/comic/${result.id}`}
+                            className='text-sm font-semibold'
+                          >
+                            {result.title}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              )}
+            </div>
           </li>
         </ul>
       </nav>

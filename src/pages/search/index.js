@@ -54,7 +54,6 @@ export async function getServerSideProps(context) {
 
   const { results } = await search({ query: q });
 
-  //llamar a la api de algolia para buscar resultados
   return {
     props: {
       query: q,

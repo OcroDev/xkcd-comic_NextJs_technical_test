@@ -9,6 +9,6 @@ export default async function handler(req, res) {
   } = req;
 
   const { results } = await search({ query: q });
-  console.log(results);
+  console.log(results.length);
   return res.status(200).json(results);
 }

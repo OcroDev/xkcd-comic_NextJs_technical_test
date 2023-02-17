@@ -1,15 +1,10 @@
 import Head from 'next/head';
-import { Container, Card, Row, Text } from '@nextui-org/react';
-import { Header } from '@/components/Header';
-import axios from 'axios';
 import fs from 'node:fs/promises';
 import Link from 'next/link';
 import Image from 'next/image';
-import Footer from '@/components/Footer';
 import { Layout } from '@/components/Layout';
 
 export default function Home({ latestComics }) {
-  console.log(latestComics);
   return (
     <>
       <Head>
@@ -53,7 +48,7 @@ export async function getStaticProps() {
     return JSON.parse(content);
   });
   const latestComics = await Promise.all(promisesReadFiles);
-  console.log(latestComics);
+
   return {
     props: {
       latestComics,
