@@ -9,8 +9,15 @@ const languages = { es, en };
 
 export function I18NProvider({ children }) {
   const { locale } = useRouter();
-  const t = (key) => {
-    return languages[locale][key];
+  const t = (key, ...args) => {
+    let translations = languages[locale][key];
+    if (args.length === 0) {
+      return translations;
+    }
+    args.forEach((value, index) => {
+      translations = translations.replace(`\${${index + 1}}`, value);
+    });
+    return translations;
   };
   return <I18NContext.Provider value={{ t }}>{children}</I18NContext.Provider>;
 }

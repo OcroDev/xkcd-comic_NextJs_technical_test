@@ -7,8 +7,10 @@ import algoliasearch from 'algoliasearch/lite';
 import Link from 'next/link';
 import Image from 'next/image';
 import { search } from '@/services/search';
+import { useI18N } from '@/context/i18n';
 
 export default function Component({ query, results }) {
+  const { t } = useI18N();
   return (
     <>
       <Head>
@@ -16,11 +18,7 @@ export default function Component({ query, results }) {
         <meta name='description' content={`Search results for ${query}`} />
       </Head>
       <Layout>
-        <h1>
-          <span className='text-sky-900 font-bold'>{results.length} </span>{' '}
-          Resultados para:{' '}
-          <span className='text-cyan-900 font-semibold'>{query}</span>
-        </h1>
+        <h1>{t('SEARCH_RESULTS', results.length, query)}</h1>
         {results.map((result) => {
           return (
             <>
