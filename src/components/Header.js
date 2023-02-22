@@ -5,9 +5,14 @@ export function Header() {
   const searchRef = useRef();
   const [results, setResults] = useState([]);
 
-  const handleChange = () => {
-    const q = searchRef.current.value;
+  const getValue = () => searchRef.current?.value;
 
+  const handleChange = () => {
+    const q = getValue();
+    if (q === '') {
+      setResults([]);
+      return;
+    }
     fetch(`/api/search?q=${q}`)
       .then((res) => res.json())
       .then((searchResults) => {
@@ -36,15 +41,26 @@ export function Header() {
               onChange={() => handleChange()}
               className='px-4 py-1 text-xs border border-gray-400 rounded-3xl'
             />
-            <div className='relative'>
-              {results !== null && (
-                <div className='absolute top-0 left-0'>
+            <div className='relative  '>
+              {Boolean(results.length) && (
+                <div className='absolute top-0 left-0 bg-white opacity-90 rounded-xl'>
                   <ul>
+                    <li
+                      key={'all-results'}
+                      className='block text-ellipsis whitespace-nowrap overflow-hidden hover:bg-sky-200 hover:rounded-lg p-3 text-gray-400'
+                    >
+                      <Link
+                        href={`/search?q=${getValue()}`}
+                        className='text-sm font-semibold'
+                      >
+                        ver {results.length} resultados
+                      </Link>
+                    </li>
                     {results.map((result) => {
                       return (
                         <li
                           key={result.id}
-                          className='hover:bg-sky-100 hover:opacity-70'
+                          className='block text-ellipsis whitespace-nowrap overflow-hidden hover:bg-sky-200 hover:rounded-lg p-3'
                         >
                           <Link
                             href={`/comic/${result.id}`}
