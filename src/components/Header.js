@@ -40,6 +40,15 @@ export function Header() {
             </Link>
           </li>
           <li>
+            <Link
+              href='/'
+              className='text-sm font-semibold'
+              locale={restOfLocales[0]}
+            >
+              {restOfLocales[0]}
+            </Link>
+          </li>
+          <li>
             <input
               ref={searchRef}
               type='search'
@@ -76,15 +85,6 @@ export function Header() {
                         </li>
                       );
                     })}
-                    <li>
-                      <Link
-                        href='/'
-                        className='text-sm font-semibold'
-                        locale={restOfLocales[0]}
-                      >
-                        {restOfLocales[0]}
-                      </Link>
-                    </li>
                   </ul>
                 </div>
               )}
